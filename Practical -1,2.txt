@@ -1,0 +1,25 @@
+var mysql = require('mysql');
+var conn = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "sahil_db",
+    table: "Product"
+});
+
+conn.connect(function (err){
+    if (err) throw err;
+    console.log("Connected Successfulllyyyyy....!");
+
+    var alterTbName = "ALTER TABLE Product RENAME TO Movies";
+    conn.query(alterTbName, (err,res) => {
+        if (err) throw err;
+        console.log("******..Table Rename Succefully..*****");
+    });
+
+    var alterAddClm = "ALTER TABLE Movies ADD Box_Office INT DEFAULT 0";
+    conn.query(alterAddClm, (err,res) => {
+        if (err) throw err;
+        console.log("*****..New Column Added..*****");
+    });
+});
